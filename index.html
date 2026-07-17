@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이건영 | 풀스택 & AI 엔지니어 포트폴리오</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            --font-main: 'Inter', 'Noto Sans KR', sans-serif;
+            --font-title: 'Outfit', 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+        }
+
+        /* Top Bar */
+        header {
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .contact-info a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Slide Container & Wrapper */
+        .slider-container {
+            flex-grow: 1;
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .slide {
+            position: absolute;
+            width: 92%;
+            max-width: 1240px;
+            height: 90%;
+            padding: 28px 36px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            opacity: 0;
+            transform: scale(0.97) translateY(10px);
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden; /* No scroll at slide container level */
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            z-index: 5;
+        }
+
+        /* Slide Content Structure */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        .slide-badge {
+            font-family: var(--font-title);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 4px 10px;
+            border-radius: 100px;
+            border: 1px solid rgba(59, 130, 246, 0.15);
+        }
+
+        .slide-title {
+            font-family: var(--font-title);
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-top: 6px;
+        }
+
+        .slide-title span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: right;
+            line-height: 1.4;
+        }
+
+        .slide-body {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 32px;
+            align-items: center;
+            overflow: hidden; /* Prevent scrolling inside body */
+            height: 100%;
+        }
+
+        /* Left Content Column */
+        .content-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid var(--accent-purple);
+            padding: 12px 16px;
+            border-radius: 4px 12px 12px 4px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .highlight-box strong {
+            color: #fff;
+        }
+
+        .bullets-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .bullets-list li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .bullets-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-blue);
+            font-size: 14px;
+        }
+
+        .bullets-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* Right Diagram / Grid Column */
+        .content-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid var(--card-border);
+            padding: 12px 16px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .tech-card h4 {
+            font-family: var(--font-title);
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tech-card h4::before {
+            content: "";
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-pink);
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 3px 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* Custom Flowcharts */
+        .architecture-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            font-size: 12px;
+        }
+
+        .arch-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+        }
+
+        .arch-node {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 100px;
+            font-weight: 500;
+        }
+
+        .arch-node.client { border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.05); }
+        .arch-node.main-api { border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.05); }
+        .arch-node.ai-server { border-color: rgba(236, 72, 153, 0.4); background: rgba(236, 72, 153, 0.05); }
+        .arch-node.db { border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.05); }
+
+        .arch-arrow-h {
+            flex-grow: 1;
+            height: 1px;
+            background: var(--text-secondary);
+            opacity: 0.3;
+            margin: 0 8px;
+            position: relative;
+        }
+        .arch-arrow-h::after {
+            content: "▶";
+            position: absolute;
+            right: -2px;
+            top: -6px;
+            font-size: 7px;
+            color: var(--text-secondary);
+        }
+
+        .arch-arrow-v {
+            width: 1px;
+            height: 14px;
+            background: var(--text-secondary);
+            opacity: 0.3;
+            margin: 0 auto;
+            position: relative;
+        }
+        .arch-arrow-v::after {
+            content: "▼";
+            position: absolute;
+            bottom: -5px;
+            left: -4px;
+            font-size: 7px;
+            color: var(--text-secondary);
+        }
+
+        /* Troubles list */
+        .trouble-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .trouble-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            border-left: 3px solid var(--accent-pink);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        .trouble-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: #fff;
+        }
+
+        .trouble-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Slide Footer & Navigation */
+        footer {
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--card-border);
+            z-index: 10;
+        }
+
+        .page-indicator {
+            font-family: var(--font-title);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .page-indicator span {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--accent-blue);
+            transform: scale(1.3);
+            box-shadow: 0 0 8px var(--accent-blue);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Keyboard tip */
+        .kb-tip {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        /* Specific CSS animations & adjust for 1st page logo */
+        .title-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .main-hero-title {
+            font-family: var(--font-title);
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+        
+        .main-hero-subtitle {
+            font-size: 14.5px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .stat-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 8px 16px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-title);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent-blue);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Responsive Layouts */
+        @media (max-width: 1024px) {
+            .slide-body {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .content-right {
+                height: auto;
+            }
+            body {
+                overflow: auto;
+                height: auto;
+            }
+            .slider-container {
+                height: auto;
+                min-height: 600px;
+                padding: 16px 0;
+            }
+            .slide {
+                position: relative;
+                height: auto;
+                opacity: 0;
+                display: none;
+            }
+            .slide.active {
+                opacity: 1;
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">GEON-YEONG.DEV</div>
+        <div class="contact-info">
+            <span>📞 010-6276-0186</span>
+            <span>✉️ <a href="mailto:voidkknd17@gmail.com">voidkknd17@gmail.com</a></span>
+            <span>🌐 <a href="https://github.com/odorable-code" target="_blank">github.com/odorable-code</a></span>
+        </div>
+    </header>
+
+    <!-- Slider Container -->
+    <div class="slider-container">
+
+        <!-- Slide 1: Cover -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-header">
+                <div>
+                    <span class="slide-badge">01. FULL-STACK PROFILE</span>
+                    <div class="slide-title">화면부터 서버, AI 파이프라인까지 1인 단독 구축이 가능한 풀스택 엔지니어 <span>이건영</span>입니다.</div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <div class="title-left">
+                    <div class="main-hero-title">사용자 UI에서<br>인프라 배포까지<br>모든 흐름을 설계합니다.</div>
+                    <div class="main-hero-subtitle">
+                        단순히 백엔드 API 구현에 머무르지 않고, <strong>React(프론트엔드) 화면 설계</strong>와 <strong>Spring Boot 백엔드</strong>, 그리고 <strong>RAG AI 연동 파이프라인</strong> 및 <strong>AWS 배포 인프라</strong>까지 서비스의 전체 라이프사이클을 주도적으로 개발해 왔습니다.
+                    </div>
+                    <div class="stat-group">
+                        <div class="stat-item">
+                            <div class="stat-value">React + Spring</div>
+                            <div class="stat-label">웹 풀스택 구현 역량</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">1인 완수</div>
+                            <div class="stat-label">Matey 아키텍처 독자 구축</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">AI & RAG</div>
+                            <div class="stat-label">Gemini & Chroma DB 연동</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4>Frontend UI</h4>
+                            <div class="tech-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">JavaScript (ES6+)</span>
+                                <span class="tag">StompJS</span>
+                            </div>
+                        </div>
+                        <div class="tech-card">
+                            <h4>Backend API</h4>
+                            <div class="tech-tags">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">MyBatis</span>
+                                <span class="tag">MySQL</span>
+                            </div>
+                        </div>
+                        <div class="tech-card">
+                            <h4>AI & LLM Server</h4>
+                            <div class="tech-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">FastAPI</span>
+                                <span class="tag">Chroma DB (Vector)</span>
+                                <span class="tag">Gemini API (RAG)</span>
+                            </div>
+                        </div>
+                        <div class="tech-card">
+                            <h4>DevOps / Infra</h4>
+                            <div class="tech-tags">
+                                <span class="tag">Docker</span>
+                                <span class="tag">AWS EC2</span>
+                                <span class="tag">GitHub Actions CI/CD</span>
+                                <span class="tag">Linux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Matey Project Overview (Solo Project proof) -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <div>
+                    <span class="slide-badge">02. PROJECT 01 (1인 단독 개발)</span>
+                    <div class="slide-title">RAG 기반 고민 상담 캐릭터 챗봇 <span>메이티 (Matey)</span></div>
+                </div>
+                <div class="project-meta">
+                    <strong>개발 기간</strong>: 2026.05 ~ 2026.06 (개인 프로젝트)<br>
+                    <strong>주요 역할</strong>: 기획, 아키텍처 설계, React/SpringBoot/FastAPI 및 배포 인프라 <strong>1인 단독 개발</strong>
+                </div>
+            </div>
+            <div class="slide-body">
+                <div class="content-left">
+                    <div class="highlight-box">
+                        <strong>프론트엔드(React), 백엔드(Spring Boot), AI(FastAPI/LLM)</strong>를 유기적으로 조율하여 대화형 심리 및 일상 고민 상담 웹서비스의 **전체 파이프라인을 혼자서 완성**해 낸 대표적인 웹 풀스택 프로젝트입니다.
+                    </div>
+                    <ul class="bullets-list">
+                        <li><strong>독자적인 3-Tier 아키텍처 설계</strong>: 사용자 인증 및 계정 처리는 **Spring Boot**로, 임베딩 및 RAG LLM 연산은 **FastAPI** 서버로 비동기 중계함으로써 연산 부하를 완벽히 격리한 구조를 직접 설계했습니다.</li>
+                        <li><strong>React UI/UX 구현</strong>: 대화 말풍선 컴포넌트, 회원가입/로그인 세션 처리 및 상담 내역 조회 마이페이지 뷰를 React를 사용해 백엔드 API 규격에 맞춰 독자 개발했습니다.</li>
+                        <li><strong>FastAPI RAG AI 파이프라인</strong>: 사용자 발화를 임베딩한 뒤 Chroma DB에서 관련 캐릭터 페르소나 정보를 탐색하고, 이를 시스템 프롬프트와 조합해 Gemini 3.1 Flash API로 최적의 답변을 생성하는 파이프라인을 단독 완성했습니다.</li>
+                    </ul>
+                </div>
+                <div class="content-right">
+                    <div class="architecture-diagram">
+                        <div style="text-align:center; font-weight:700; margin-bottom:6px;">Matey 1인 독자 구축 흐름</div>
+                        <div class="arch-row">
+                            <div class="arch-node client">React Client<br>(UI / 마이페이지)</div>
+                        </div>
+                        <div class="arch-arrow-v"></div>
+                        <div class="arch-row">
+                            <div class="arch-node main-api">Spring Boot<br>(인증 / 비즈니스)</div>
+                            <div class="arch-arrow-h"></div>
+                            <div class="arch-node ai-server">FastAPI<br>(RAG / LLM)</div>
+                        </div>
+                        <div class="arch-row" style="margin-top: 6px;">
+                            <div style="width: 100px; text-align: center;">
+                                <div class="arch-arrow-v"></div>
+                                <div class="arch-node db">MySQL<br>(회원/대화데이터)</div>
+                            </div>
+                            <div style="width: 100px; text-align: center; margin-left: auto;">
+                                <div class="arch-arrow-v"></div>
+                                <div class="arch-node db">Chroma DB<br>(페르소나 임베딩)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Matey - Full-Stack Troubleshooting -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <div>
+                    <span class="slide-badge">03. FULL-STACK OPTIMIZATION</span>
+                    <div class="slide-title">Matey <span>종합적 최적화 및 문제 해결</span></div>
+                </div>
+                <div class="project-meta">
+                    <strong>보안 및 무결성</strong>: 데이터 생명주기 관리 및 프라이버시 보호<br>
+                    <strong>인프라</strong>: 멀티 컨테이너 Docker 배포 환경
+                </div>
+            </div>
+            <div class="slide-body">
+                <div class="content-left">
+                    <div class="highlight-box" style="border-color: var(--accent-pink);">
+                        <strong>"백엔드의 데이터 제약과 프론트엔드의 세션 동기화, 클라우드 리소스 한계를 동시에 해결하는 풀스택 관점의 해결력"</strong>
+                    </div>
+                    <ul class="bullets-list">
+                        <li><strong>상담 요약 테이블 기반 대화 연속성</strong>: 프라이버시 보호를 위해 대화 원문은 자동/수동 영구 삭제 정책을 타게 설계했으나, 챗봇이 과거 맥락을 기억하도록 **핵심 요약 테이블을 별도로 격리 구축**해 화면단에는 변함없는 친밀한 대화 경험을 전달했습니다.</li>
+                        <li><strong>프론트-백 연계 회원 탈퇴 무결성 해결</strong>: React에서 회원 탈퇴 시 백엔드 외래키 에러로 중단되던 에러를 MySQL DB에 <span style="color:var(--accent-pink)">ON DELETE CASCADE</span> 마이그레이션 스크립트를 작성 적용하고, React 단에서 세션 제거 및 리다이렉트 흐름까지 일사천리로 동기화했습니다.</li>
+                    </ul>
+                </div>
+                <div class="content-right">
+                    <div class="trouble-box">
+                        <div class="trouble-item">
+                            <div class="trouble-title">⚡ AWS EC2 프리티어 메모리 OOM 해결</div>
+                            <div class="trouble-desc">
+                                GitHub Actions를 활용해 EC2에 Spring Boot와 FastAPI 도커 컨테이너를 함께 배포할 때 물리 메모리(1GB) 고갈로 빌드가 뻗어버리는 문제가 있었습니다. <strong>Linux 가상 Swap File(2GB) 설정을 적용</strong>하여 추가 비용 청구 없이 멀티 서버를 안정적으로 배포했습니다.
+                            </div>
+                        </div>
+                        <div class="trouble-item">
+                            <div class="trouble-title">⚡ 페르소나 이탈 및 대화 꼬임 현상 해결</div>
+                            <div class="trouble-desc">
+                                상담이 길어지면 LLM의 문맥 제약으로 캐릭터 페르소나가 무너지는 문제를, 데이터베이스 요약본 및 세밀한 시스템 프롬프트 가중치 조절을 통해 극복하여 일관된 챗봇 답변을 보장했습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: BaroDocQ Project (Full-Stack proof) -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <div>
+                    <span class="slide-badge">04. PROJECT 02 (FULL-STACK)</span>
+                    <div class="slide-title">병원 실시간 예약 및 약국 검색 <span>바로닥큐 (BaroDocQ)</span></div>
+                </div>
+                <div class="project-meta">
+                    <strong>개발 기간</strong>: 2026.03 ~ 2026.04 (4인 풀스택 프로젝트)<br>
+                    <strong>주요 역할</strong>: 실시간 알림 웹소켓 파이프라인 구현, 공공데이터 수집 스크립트 구축
+                </div>
+            </div>
+            <div class="slide-body">
+                <div class="content-left">
+                    <div class="highlight-box" style="border-color: var(--accent-blue);">
+                        공공데이터 API로 수집한 전국 병원/약국 데이터 적재를 기초로, 실시간 웹소켓 양방향 예약을 연동한 풀스택 웹 어플리케이션입니다.
+                    </div>
+                    <ul class="bullets-list">
+                        <li><strong>WebSocket & STOMP 양방향 실시간 알림 파이프라인</strong>: 예약 상태 변화 시 사용자와 관리자(병원)가 즉각 정보를 받도록 **Spring Boot WebSocket STOMP 브로커**와 프론트엔드의 **StompJS** 클라이언트 모듈을 맞물려 개발함으로써, 실시간 UI 렌더링 동기화를 완수했습니다.</li>
+                        <li><strong>React 화면단 UI 컴포넌트 개발</strong>: 회원 가입/수정, 실시간 예약 신청 및 내역 조회, 병원 즐겨찾기, 병원 리뷰 작성 등 마이페이지와 핵심 예약 플로우의 **프론트엔드 UI 컴포넌트**를 직접 구현했습니다.</li>
+                        <li><strong>데이터 수집 & DB 이관 스크립트 작성</strong>: 건강보험심사평가원 및 공공포털 API 데이터를 수집하는 Python 스크래퍼를 구축하고, 정제되지 않은 Null 값 처리 및 중복을 필터링해 MySQL에 대량 적재하는 End-to-End 파이프라인을 완성했습니다.</li>
+                    </ul>
+                </div>
+                <div class="content-right">
+                    <div class="architecture-diagram" style="padding: 16px;">
+                        <div style="text-align:center; font-weight:700; margin-bottom:8px;">바로닥큐 실시간 양방향 통신 흐름</div>
+                        <div class="arch-row">
+                            <div class="arch-node client" style="font-size:11px;">React Front (StompJS)</div>
+                            <div class="arch-arrow-h" style="min-width:30px;"></div>
+                            <div class="arch-node main-api" style="font-size:11px;">Spring Boot WebSocket</div>
+                        </div>
+                        <div style="display:flex; justify-content:space-around; font-size:10px; color:var(--text-secondary); margin: -4px 0 4px 0; width:100%;">
+                            <span style="margin-left: 20px;">[WebSocket / STOMP 실시간 동기화]</span>
+                        </div>
+                        <div class="arch-row">
+                            <div class="arch-node db" style="margin: 0 auto; width: 140px; border-color: rgba(251, 191, 36, 0.4);">MySQL (병원/예약/회원)</div>
+                        </div>
+                        <div class="arch-arrow-v" style="height: 10px;"></div>
+                        <div class="arch-row">
+                            <div class="arch-node ai-server" style="margin: 0 auto; width: 140px; border-color: rgba(236, 72, 153, 0.4); font-size:11px;">Python ETL Scraper</div>
+                        </div>
+                        <div class="arch-arrow-v" style="height: 10px;"></div>
+                        <div style="background: rgba(255, 255, 255, 0.02); padding: 6px; border-radius: 6px; border: 1px dashed rgba(255, 255, 255, 0.05); text-align: center; font-size:10px; color: var(--text-secondary);">
+                            건강보험심사평가원 / 공공데이터포털
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Background & Vision -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <div>
+                    <span class="slide-badge">05. FULL-STACK VISION</span>
+                    <div class="slide-title">1인 개발 DNA에서 시작된 <span>준비된 풀스택 인재</span></div>
+                </div>
+            </div>
+            <div class="slide-body">
+                <div class="content-left">
+                    <div class="highlight-box" style="border-color: var(--accent-pink);">
+                        <strong>"전체 라이프사이클을 스스로 통제해 본 1인 개발 경험은 프로젝트의 기획, 개발, 출시 간 시너지를 내는 최고의 동력입니다."</strong>
+                    </div>
+                    <ul class="bullets-list" style="gap: 10px;">
+                        <li><strong>일관된 1인 개발 커리어 (iOS 3건 & 웹 1건)</strong>: 과거 (주)CKNB 정직원 근무 시 iOS 1인 개발자로 3건의 앱(QRJOY, QRnJoy, HiddenTag)을 단독 출시했던 기본기가 최신 웹 서비스(Matey)의 독자적 3-Tier 아키텍처 설계와 구현까지 관통하며 **독립적인 제품 완수력**을 입증합니다.</li>
+                        <li><strong>공백기를 도약으로 이끈 습득력</strong>: 개발 직무 복귀를 위해 학점은행제 정보통신학사를 취득하고 패스트캠퍼스 풀스택 양성과정에서 7개월간 현대적인 웹 기술 스택(Spring Boot, React, FastAPI, Chroma DB, RAG)을 빠르게 습득하여 1인 서비스 구축으로 직접 증명했습니다.</li>
+                        <li><strong>소통 비용을 줄이는 시야</strong>: 프론트엔드가 상태 관리를 어떻게 하는지, 백엔드가 데이터를 어떻게 구조화하는지를 명확히 이해하고 일하기 때문에 팀 내 협업에서 최고의 윤활유 역할을 수행합니다.</li>
+                    </ul>
+                </div>
+                <div class="content-right" style="gap: 12px;">
+                    <div class="tech-card" style="border-left: 3px solid var(--accent-blue);">
+                        <h4 style="margin-bottom:4px; font-size:13.5px;">🤝 협업 효율 극대화 (가교형 엔지니어)</h4>
+                        <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">
+                            클라이언트와 백엔드의 데이터 흐름을 명확하게 파악하여, 화면 렌더링 부하를 줄이면서 백엔드 부하도 고르게 나누는 합리적인 협업 연동 규격을 설계하겠습니다.
+                        </p>
+                    </div>
+                    <div class="tech-card" style="border-left: 3px solid var(--accent-purple);">
+                        <h4 style="margin-bottom:4px; font-size:13.5px;">📈 유연한 비즈니스 런칭 역량</h4>
+                        <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">
+                            1인 개발과 풀스택 아키텍처 구상 능력을 발휘하여 프로토타입 UI 기획 단계부터 실제 서버 배포에 이르는 속도를 타사 대비 획기적으로 끌어올리겠습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Controls -->
+    <footer>
+        <div class="page-indicator">
+            <span id="current-slide">01</span> / 05
+        </div>
+        <div class="nav-dots" id="nav-dots">
+            <div class="dot active" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+            <div class="dot" data-slide="3"></div>
+            <div class="dot" data-slide="4"></div>
+            <div class="dot" data-slide="5"></div>
+        </div>
+        <div>
+            <div class="controls">
+                <button class="nav-btn" id="prev-btn" disabled>&larr;</button>
+                <button class="nav-btn" id="next-btn">&rarr;</button>
+            </div>
+            <div class="kb-tip">키보드 방향키(←, →)로도 이동 가능합니다</div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Slider Engine -->
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentSlideText = document.getElementById('current-slide');
+        let currentIdx = 0;
+
+        function updateSlider(newIndex) {
+            if (newIndex < 0 || newIndex >= slides.length) return;
+
+            // Remove active classes
+            slides[currentIdx].classList.remove('active');
+            dots[currentIdx].classList.remove('active');
+
+            // Set new index
+            currentIdx = newIndex;
+
+            // Add active classes
+            slides[currentIdx].classList.add('active');
+            dots[currentIdx].classList.add('active');
+
+            // Update UI elements
+            currentSlideText.innerText = String(currentIdx + 1).padStart(2, '0');
+
+            // Button status
+            prevBtn.disabled = currentIdx === 0;
+            nextBtn.disabled = currentIdx === slides.length - 1;
+        }
+
+        // Click listeners for arrows
+        prevBtn.addEventListener('click', () => updateSlider(currentIdx - 1));
+        nextBtn.addEventListener('click', () => updateSlider(currentIdx + 1));
+
+        // Click listeners for dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => updateSlider(index));
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                if (currentIdx < slides.length - 1) updateSlider(currentIdx + 1);
+            } else if (e.key === 'ArrowLeft') {
+                if (currentIdx > 0) updateSlider(currentIdx - 1);
+            }
+        });
+    </script>
+</body>
+</html>

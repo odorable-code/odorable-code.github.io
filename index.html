@@ -17,15 +17,15 @@
         }
 
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --accent-blue: #3b82f6;
-            --accent-purple: #8b5cf6;
-            --accent-pink: #ec4899;
-            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(99, 102, 241, 0.08);
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --accent-blue: #1d4ed8;
+            --accent-purple: #6d28d9;
+            --accent-pink: #be185d;
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%);
             --font-main: 'Inter', 'Noto Sans KR', sans-serif;
             --font-title: 'Outfit', 'Noto Sans KR', sans-serif;
         }
@@ -40,8 +40,8 @@
             flex-direction: column;
             justify-content: space-between;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
         }
 
         /* Top Bar */
@@ -50,7 +50,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
             z-index: 10;
         }
 
@@ -104,6 +104,7 @@
             border-radius: 24px;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(31, 38, 135, 0.06), 0 1px 3px rgba(31, 38, 135, 0.02);
             opacity: 0;
             transform: scale(0.97) translateY(10px);
             pointer-events: none;
@@ -111,7 +112,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow: hidden; /* No scroll at slide container level */
+            overflow: hidden;
         }
 
         .slide.active {
@@ -137,7 +138,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--accent-blue);
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.06);
             padding: 4px 10px;
             border-radius: 100px;
             border: 1px solid rgba(59, 130, 246, 0.15);
@@ -149,6 +150,7 @@
             font-weight: 800;
             letter-spacing: -0.5px;
             margin-top: 6px;
+            color: #0f172a;
         }
 
         .slide-title span {
@@ -170,7 +172,7 @@
             grid-template-columns: 1.15fr 0.85fr;
             gap: 32px;
             align-items: center;
-            overflow: hidden; /* Prevent scrolling inside body */
+            overflow: hidden;
             height: 100%;
         }
 
@@ -182,7 +184,7 @@
         }
 
         .highlight-box {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(99, 102, 241, 0.03);
             border-left: 4px solid var(--accent-purple);
             padding: 12px 16px;
             border-radius: 4px 12px 12px 4px;
@@ -192,7 +194,7 @@
         }
 
         .highlight-box strong {
-            color: #fff;
+            color: #0f172a;
         }
 
         .bullets-list {
@@ -220,7 +222,7 @@
         }
 
         .bullets-list li strong {
-            color: var(--text-primary);
+            color: #0f172a;
         }
 
         /* Right Diagram / Grid Column */
@@ -239,24 +241,26 @@
         }
 
         .tech-card {
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid var(--card-border);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             padding: 12px 16px;
             border-radius: 14px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
         }
 
         .tech-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.15);
+            background: #ffffff;
+            border-color: rgba(99, 102, 241, 0.25);
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08);
         }
 
         .tech-card h4 {
             font-family: var(--font-title);
             font-size: 14px;
             font-weight: 600;
-            color: #fff;
+            color: #0f172a;
             margin-bottom: 6px;
             display: flex;
             align-items: center;
@@ -281,10 +285,10 @@
         .tag {
             font-size: 11px;
             padding: 3px 6px;
-            background: rgba(255, 255, 255, 0.05);
+            background: #f1f5f9;
             border-radius: 5px;
-            color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: #475569;
+            border: 1px solid #e2e8f0;
         }
 
         /* Custom Flowcharts */
@@ -293,10 +297,11 @@
             flex-direction: column;
             gap: 12px;
             padding: 16px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--card-border);
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 14px;
             font-size: 12px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
         }
 
         .arch-row {
@@ -307,25 +312,27 @@
         }
 
         .arch-node {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--card-border);
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
             padding: 8px 12px;
             border-radius: 8px;
             text-align: center;
             min-width: 100px;
             font-weight: 500;
+            color: #334155;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
-        .arch-node.client { border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.05); }
-        .arch-node.main-api { border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.05); }
-        .arch-node.ai-server { border-color: rgba(236, 72, 153, 0.4); background: rgba(236, 72, 153, 0.05); }
-        .arch-node.db { border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.05); }
+        .arch-node.client { border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.03); color: #1e40af; }
+        .arch-node.main-api { border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.03); color: #5b21b6; }
+        .arch-node.ai-server { border-color: rgba(236, 72, 153, 0.4); background: rgba(236, 72, 153, 0.03); color: #9d174d; }
+        .arch-node.db { border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.03); color: #854d0e; }
 
         .arch-arrow-h {
             flex-grow: 1;
             height: 1px;
-            background: var(--text-secondary);
-            opacity: 0.3;
+            background: #94a3b8;
+            opacity: 0.6;
             margin: 0 8px;
             position: relative;
         }
@@ -335,14 +342,14 @@
             right: -2px;
             top: -6px;
             font-size: 7px;
-            color: var(--text-secondary);
+            color: #94a3b8;
         }
 
         .arch-arrow-v {
             width: 1px;
             height: 14px;
-            background: var(--text-secondary);
-            opacity: 0.3;
+            background: #94a3b8;
+            opacity: 0.6;
             margin: 0 auto;
             position: relative;
         }
@@ -352,7 +359,7 @@
             bottom: -5px;
             left: -4px;
             font-size: 7px;
-            color: var(--text-secondary);
+            color: #94a3b8;
         }
 
         /* Troubles list */
@@ -363,18 +370,19 @@
         }
 
         .trouble-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--card-border);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             border-left: 3px solid var(--accent-pink);
             border-radius: 8px;
             padding: 10px 14px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
         }
 
         .trouble-title {
             font-size: 13px;
             font-weight: 700;
             margin-bottom: 2px;
-            color: #fff;
+            color: #0f172a;
         }
 
         .trouble-desc {
@@ -389,7 +397,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid var(--card-border);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
             z-index: 10;
         }
 
@@ -401,7 +409,7 @@
         }
 
         .page-indicator span {
-            color: #fff;
+            color: #0f172a;
             font-weight: 700;
         }
 
@@ -414,7 +422,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -422,7 +430,7 @@
         .dot.active {
             background: var(--accent-blue);
             transform: scale(1.3);
-            box-shadow: 0 0 8px var(--accent-blue);
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
         }
 
         .controls {
@@ -431,9 +439,9 @@
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            color: #fff;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #334155;
             width: 38px;
             height: 38px;
             border-radius: 50%;
@@ -444,11 +452,12 @@
             transition: all 0.2s ease;
             font-size: 14px;
             outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: #f8fafc;
+            border-color: #94a3b8;
             transform: scale(1.05);
         }
 
@@ -460,12 +469,14 @@
             opacity: 0.3;
             cursor: not-allowed;
             transform: none;
+            background: #f1f5f9;
+            border-color: #e2e8f0;
         }
 
         /* Keyboard tip */
         .kb-tip {
             font-size: 10px;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(0, 0, 0, 0.4);
             text-align: center;
             margin-top: 2px;
         }
@@ -484,6 +495,7 @@
             line-height: 1.15;
             letter-spacing: -1.5px;
             margin-bottom: 12px;
+            color: #0f172a;
         }
         
         .main-hero-subtitle {
@@ -493,17 +505,22 @@
             margin-bottom: 18px;
         }
 
+        .main-hero-subtitle strong {
+            color: #0f172a;
+        }
+
         .stat-group {
             display: flex;
             gap: 16px;
         }
 
         .stat-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--card-border);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 10px;
             padding: 8px 16px;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
         }
 
         .stat-value {
@@ -651,10 +668,10 @@
             <div class="slide-body">
                 <div class="content-left">
                     <div class="highlight-box">
-                        <strong>프론트엔드(React), 백엔드(Spring Boot), AI(FastAPI/LLM)</strong>를 유기적으로 조율하여 대화형 심리 및 일상 고민 상담 웹서비스의 **전체 파이프라인을 혼자서 완성**해 낸 대표적인 웹 풀스택 프로젝트입니다.
+                        <strong>프론트엔드(React), 백엔드(Spring Boot), AI(FastAPI/LLM)</strong>를 유기적으로 조율하여 대화형 심리 및 일상 고민 상담 웹서비스의 <strong>전체 파이프라인을 혼자서 완성</strong>해 낸 대표적인 웹 풀스택 프로젝트입니다.
                     </div>
                     <ul class="bullets-list">
-                        <li><strong>독자적인 3-Tier 아키텍처 설계</strong>: 사용자 인증 및 계정 처리는 **Spring Boot**로, 임베딩 및 RAG LLM 연산은 **FastAPI** 서버로 비동기 중계함으로써 연산 부하를 완벽히 격리한 구조를 직접 설계했습니다.</li>
+                        <li><strong>독자적인 3-Tier 아키텍처 설계</strong>: 사용자 인증 및 계정 처리는 <strong>Spring Boot</strong>로, 임베딩 및 RAG LLM 연산은 <strong>FastAPI</strong> 서버로 비동기 중계함으로써 연산 부하를 완벽히 격리한 구조를 직접 설계했습니다.</li>
                         <li><strong>React UI/UX 구현</strong>: 대화 말풍선 컴포넌트, 회원가입/로그인 세션 처리 및 상담 내역 조회 마이페이지 뷰를 React를 사용해 백엔드 API 규격에 맞춰 독자 개발했습니다.</li>
                         <li><strong>FastAPI RAG AI 파이프라인</strong>: 사용자 발화를 임베딩한 뒤 Chroma DB에서 관련 캐릭터 페르소나 정보를 탐색하고, 이를 시스템 프롬프트와 조합해 Gemini 3.1 Flash API로 최적의 답변을 생성하는 파이프라인을 단독 완성했습니다.</li>
                     </ul>
@@ -704,7 +721,7 @@
                         <strong>"백엔드의 데이터 제약과 프론트엔드의 세션 동기화, 클라우드 리소스 한계를 동시에 해결하는 풀스택 관점의 해결력"</strong>
                     </div>
                     <ul class="bullets-list">
-                        <li><strong>상담 요약 테이블 기반 대화 연속성</strong>: 프라이버시 보호를 위해 대화 원문은 자동/수동 영구 삭제 정책을 타게 설계했으나, 챗봇이 과거 맥락을 기억하도록 **핵심 요약 테이블을 별도로 격리 구축**해 화면단에는 변함없는 친밀한 대화 경험을 전달했습니다.</li>
+                        <li><strong>상담 요약 테이블 기반 대화 연속성</strong>: 프라이버시 보호를 위해 대화 원문은 자동/수동 영구 삭제 정책을 타게 설계했으나, 챗봇이 과거 맥락을 기억하도록 <strong>핵심 요약 테이블을 별도로 격리 구축</strong>해 화면단에는 변함없는 친밀한 대화 경험을 전달했습니다.</li>
                         <li><strong>프론트-백 연계 회원 탈퇴 무결성 해결</strong>: React에서 회원 탈퇴 시 백엔드 외래키 에러로 중단되던 에러를 MySQL DB에 <span style="color:var(--accent-pink)">ON DELETE CASCADE</span> 마이그레이션 스크립트를 작성 적용하고, React 단에서 세션 제거 및 리다이렉트 흐름까지 일사천리로 동기화했습니다.</li>
                     </ul>
                 </div>
@@ -745,8 +762,8 @@
                         공공데이터 API로 수집한 전국 병원/약국 데이터 적재를 기초로, 실시간 웹소켓 양방향 예약을 연동한 풀스택 웹 어플리케이션입니다.
                     </div>
                     <ul class="bullets-list">
-                        <li><strong>WebSocket & STOMP 양방향 실시간 알림 파이프라인</strong>: 예약 상태 변화 시 사용자와 관리자(병원)가 즉각 정보를 받도록 **Spring Boot WebSocket STOMP 브로커**와 프론트엔드의 **StompJS** 클라이언트 모듈을 맞물려 개발함으로써, 실시간 UI 렌더링 동기화를 완수했습니다.</li>
-                        <li><strong>React 화면단 UI 컴포넌트 개발</strong>: 회원 가입/수정, 실시간 예약 신청 및 내역 조회, 병원 즐겨찾기, 병원 리뷰 작성 등 마이페이지와 핵심 예약 플로우의 **프론트엔드 UI 컴포넌트**를 직접 구현했습니다.</li>
+                        <li><strong>WebSocket & STOMP 양방향 실시간 알림 파이프라인</strong>: 예약 상태 변화 시 사용자와 관리자(병원)가 즉각 정보를 받도록 <strong>Spring Boot WebSocket STOMP 브로커</strong>와 프론트엔드의 <strong>StompJS</strong> 클라이언트 모듈을 맞물려 개발함으로써, 실시간 UI 렌더링 동기화를 완수했습니다.</li>
+                        <li><strong>React 화면단 UI 컴포넌트 개발</strong>: 회원 가입/수정, 실시간 예약 신청 및 내역 조회, 병원 즐겨찾기, 병원 리뷰 작성 등 마이페이지와 핵심 예약 플로우의 <strong>프론트엔드 UI 컴포넌트</strong>를 직접 구현했습니다.</li>
                         <li><strong>데이터 수집 & DB 이관 스크립트 작성</strong>: 건강보험심사평가원 및 공공포털 API 데이터를 수집하는 Python 스크래퍼를 구축하고, 정제되지 않은 Null 값 처리 및 중복을 필터링해 MySQL에 대량 적재하는 End-to-End 파이프라인을 완성했습니다.</li>
                     </ul>
                 </div>
@@ -791,7 +808,7 @@
                         <strong>"전체 라이프사이클을 스스로 통제해 본 1인 개발 경험은 프로젝트의 기획, 개발, 출시 간 시너지를 내는 최고의 동력입니다."</strong>
                     </div>
                     <ul class="bullets-list" style="gap: 10px;">
-                        <li><strong>일관된 1인 개발 커리어 (iOS 3건 & 웹 1건)</strong>: 과거 (주)CKNB 정직원 근무 시 iOS 1인 개발자로 3건의 앱(QRJOY, QRnJoy, HiddenTag)을 단독 출시했던 기본기가 최신 웹 서비스(Matey)의 독자적 3-Tier 아키텍처 설계와 구현까지 관통하며 **독립적인 제품 완수력**을 입증합니다.</li>
+                        <li><strong>일관된 1인 개발 커리어 (iOS 3건 & 웹 1건)</strong>: 과거 (주)CKNB 정직원 근무 시 iOS 1인 개발자로 3건의 앱(QRJOY, QRnJoy, HiddenTag)을 단독 출시했던 기본기가 최신 웹 서비스(Matey)의 독자적 3-Tier 아키텍처 설계와 구현까지 관통하며 <strong>독립적인 제품 완수력</strong>을 입증합니다.</li>
                         <li><strong>공백기를 도약으로 이끈 습득력</strong>: 개발 직무 복귀를 위해 학점은행제 정보통신학사를 취득하고 패스트캠퍼스 풀스택 양성과정에서 7개월간 현대적인 웹 기술 스택(Spring Boot, React, FastAPI, Chroma DB, RAG)을 빠르게 습득하여 1인 서비스 구축으로 직접 증명했습니다.</li>
                         <li><strong>소통 비용을 줄이는 시야</strong>: 프론트엔드가 상태 관리를 어떻게 하는지, 백엔드가 데이터를 어떻게 구조화하는지를 명확히 이해하고 일하기 때문에 팀 내 협업에서 최고의 윤활유 역할을 수행합니다.</li>
                     </ul>

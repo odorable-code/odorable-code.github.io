@@ -592,9 +592,9 @@
             </div>
             <div class="slide-body">
                 <div class="title-left">
-                    <div class="main-hero-title">사용자 UI에서<br>인프라 배포까지<br>모든 흐름을 설계합니다.</div>
+                    <div class="main-hero-title"><span style="color: var(--accent-blue);">사용자 UI</span>에서<br><span style="color: var(--accent-pink);">인프라 배포</span>까지<br>모든 흐름을 설계합니다.</div>
                     <div class="main-hero-subtitle">
-                        단순히 백엔드 API 구현에 머무르지 않고, <strong>React(프론트엔드) 화면 설계</strong>와 <strong>Spring Boot 백엔드</strong>, 그리고 <strong>RAG AI 연동 파이프라인</strong> 및 <strong>AWS 배포 인프라</strong>까지 서비스의 전체 라이프사이클을 주도적으로 개발해 왔습니다.
+                        단순히 백엔드 API 구현에 머무르지 않고, <strong>사용자 UI 화면 설계</strong>부터 <strong>Spring Boot 백엔드</strong>, <strong>RAG AI 연동</strong>, 그리고 <strong>인프라 배포</strong>까지 서비스의 전체 라이프사이클을 주도적으로 개발해 왔습니다.
                     </div>
                     <div class="stat-group">
                         <div class="stat-item">
@@ -618,7 +618,7 @@
                             <div class="tech-tags">
                                 <span class="tag">React</span>
                                 <span class="tag">JavaScript (ES6+)</span>
-                                <span class="tag">StompJS</span>
+                                <span class="tag">WebSocket</span>
                             </div>
                         </div>
                         <div class="tech-card">
@@ -762,7 +762,7 @@
                         공공데이터 API로 수집한 전국 병원/약국 데이터 적재를 기초로, 실시간 웹소켓 양방향 예약을 연동한 풀스택 웹 어플리케이션입니다.
                     </div>
                     <ul class="bullets-list">
-                        <li><strong>WebSocket & STOMP 양방향 실시간 알림 파이프라인</strong>: 예약 상태 변화 시 사용자와 관리자(병원)가 즉각 정보를 받도록 <strong>Spring Boot WebSocket STOMP 브로커</strong>와 프론트엔드의 <strong>StompJS</strong> 클라이언트 모듈을 맞물려 개발함으로써, 실시간 UI 렌더링 동기화를 완수했습니다.</li>
+                        <li><strong>WebSocket & STOMP 양방향 실시간 알림 파이프라인</strong>: 예약 상태 변화 시 사용자와 관리자(병원)가 즉각 정보를 받도록 <strong>Spring Boot WebSocket STOMP 브로커</strong>와 프론트엔드 웹소켓 모듈을 맞물려 개발함으로써, 실시간 UI 렌더링 동기화를 완수했습니다.</li>
                         <li><strong>React 화면단 UI 컴포넌트 개발</strong>: 회원 가입/수정, 실시간 예약 신청 및 내역 조회, 병원 즐겨찾기, 병원 리뷰 작성 등 마이페이지와 핵심 예약 플로우의 <strong>프론트엔드 UI 컴포넌트</strong>를 직접 구현했습니다.</li>
                         <li><strong>데이터 수집 & DB 이관 스크립트 작성</strong>: 건강보험심사평가원 및 공공포털 API 데이터를 수집하는 Python 스크래퍼를 구축하고, 정제되지 않은 Null 값 처리 및 중복을 필터링해 MySQL에 대량 적재하는 End-to-End 파이프라인을 완성했습니다.</li>
                     </ul>
@@ -771,7 +771,7 @@
                     <div class="architecture-diagram" style="padding: 16px;">
                         <div style="text-align:center; font-weight:700; margin-bottom:8px;">바로닥큐 실시간 양방향 통신 흐름</div>
                         <div class="arch-row">
-                            <div class="arch-node client" style="font-size:11px;">React Front (StompJS)</div>
+                            <div class="arch-node client" style="font-size:11px;">React Front (WebSocket)</div>
                             <div class="arch-arrow-h" style="min-width:30px;"></div>
                             <div class="arch-node main-api" style="font-size:11px;">Spring Boot WebSocket</div>
                         </div>
